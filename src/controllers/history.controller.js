@@ -22,6 +22,8 @@ exports.getHistory = async (req, res, next) => {
         }
         const skip = (page - 1) * limit;
         const history = await History.find(query)
+            .populate({ path: "newData.company", model: "Company" })
+            .populate({ path: "newData.product", model: "Product" })
             .populate("user", "fullName email role")
             .sort({ date: -1 })
             .skip(skip)

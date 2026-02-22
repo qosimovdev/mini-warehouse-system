@@ -5,9 +5,9 @@ const User = require("../models/user.model");
 
 mongoose.connect(process.env.MONGO_URI);
 const createAdmin = async () => {
-    const email = "admin@example.com";
-    const fullName = "Super Admin";
-    const password = "Admin123!";
+    const email = "admin";
+    const fullName = "Ibrohim";
+    const password = "ibrohim";
     const exists = await User.findOne({ email });
     if (exists) {
         console.log("Admin already exists");

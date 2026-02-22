@@ -4,7 +4,7 @@ const protect = require("../middlewares/auth.middleware")
 const roleGuard = require("../middlewares/role.middleware")
 
 router.use(protect)
-router.use(roleGuard("ADMIN"))
+// router.use(roleGuard("ADMIN"))
 
 router.post("/", prodController.createProduct)
 router.get("/", prodController.getProducts)
