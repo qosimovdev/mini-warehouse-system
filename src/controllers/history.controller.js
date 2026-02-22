@@ -5,35 +5,28 @@ exports.getHistory = async (req, res, next) => {
         const {
             type,
             action,
-            // user,
+            user,
             startDate,
             endDate,
             page = 1,
             limit = 10
         } = req.query;
-
         const query = {};
-
         if (type) query.type = type;
         if (action) query.action = action;
-        // if (user) query.user = user;
-
+        if (user) query.user = user;
         if (startDate || endDate) {
             query.date = {};
             if (startDate) query.date.$gte = new Date(startDate);
             if (endDate) query.date.$lte = new Date(endDate);
         }
-
         const skip = (page - 1) * limit;
-
         const history = await History.find(query)
-            // .populate("user", "fullName email role")
+            .populate("user", "fullName email role")
             .sort({ date: -1 })
             .skip(skip)
             .limit(Number(limit));
-
         const total = await History.countDocuments(query);
-
         res.status(200).json({
             success: true,
             total,
@@ -41,7 +34,6 @@ exports.getHistory = async (req, res, next) => {
             pages: Math.ceil(total / limit),
             history
         });
-
     } catch (err) {
         next(err);
     }

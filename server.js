@@ -13,12 +13,14 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 
+const authRoutes = require("./src/routes/auth.route")
 const productRoutes = require("./src/routes/product.route")
 const purchaseRoutes = require("./src/routes/purchase.route")
 const companyRoutes = require("./src/routes/company.route")
 const historyRoutes = require("./src/routes/history.route")
 
 
+app.use("/api/auth", authRoutes)
 app.use("/api/product", productRoutes)
 app.use("/api/purchase", purchaseRoutes)
 app.use("/api/company", companyRoutes)
