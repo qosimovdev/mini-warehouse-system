@@ -9,6 +9,6 @@ const historySchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     oldData: { type: Object },
     newData: { type: Object }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("History", historySchema);
